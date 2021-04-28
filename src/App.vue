@@ -47,6 +47,7 @@ export default {
     box-sizing: border-box;
     outline: 0;
     border: none;
+    font-family: 'Inter', sans-serif;
   }
 
   @media (max-width: 1080px) {
