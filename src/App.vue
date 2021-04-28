@@ -27,7 +27,7 @@ export default {
   methods: {
     async fetchItems() {
       const { data } = await api.get('tasks.json')
-      console.log({ data })
+      this.list = data
     }
   },
   created() {

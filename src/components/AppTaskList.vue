@@ -17,6 +17,7 @@
 
 <script>
 export default {
+  name: 'AppTaskList',
   props: {
     list: {
       type: Array,
