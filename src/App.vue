@@ -31,6 +31,9 @@ export default {
         { title: 'Study VueJS', done: false },
         { title: 'Create TaskList Project', done: false },
         { title: 'Create Project Using 3rd Party API', done: false },
+        { title: 'Create Pokemon Project Using 3rd Party API', done: false },
+        { title: 'Create Star Wars Project Using 3rd Party API', done: false },
+        { title: 'Create Naruto Project Using 3rd Party API', done: false },
       ]
     }
   }
@@ -81,7 +84,7 @@ export default {
     box-shadow: 0 0 1rem .075rem #0006;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
   }
 
   .input-container {
@@ -108,10 +111,22 @@ export default {
     flex: 1;
     background: #444;
     border-radius: .75rem;
-    padding: 2rem 1rem;
+    padding: 1.6rem 1rem;
+    border: .112rem solid #333;
+    overflow-y: scroll;
   }
 
   ul {
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem
+  }
+
+  li {
+    padding: 1rem;
+    border: .8px solid #3336;
+    border-radius: .75rem;
+    background: #333;
   }
 </style>
