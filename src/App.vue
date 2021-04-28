@@ -8,8 +8,13 @@
       <div class="list-container">
         <ul>
           <li v-for="item in list" :key="item.title" @click="markItemAsDone(item)">
-            <div :class="{ done: item.done }">
-              {{ item.title }} 
+            <div class="item">
+              <div :class="['item-title', { done: item.done }]">
+                {{ item.title }} 
+              </div>
+              <div class="remove-item" @click="removeItem(item)">
+                <button>X</button>
+              </div>
             </div>
           </li>
         </ul>
@@ -48,6 +53,10 @@ export default {
     markItemAsDone(item) {
       const itemIndex = this.list.indexOf(item)
       this.list[itemIndex].done = !item.done
+    },
+    removeItem(item) {
+      const itemIndex = this.list.indexOf(item)
+      this.list.splice(itemIndex, 1)
     }
   }
 }
@@ -144,9 +153,17 @@ export default {
     background: #333;
   }
 
-  li div {
+  li div.item {
+    display: flex;
+    justify-items: flex-end;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+
+  li div.item-title {
+    align-self: center;
+    flex: 1;
     position: relative;
-    width: fit-content;
     text-decoration: line-through;
     text-decoration-color: transparent;
     text-decoration-thickness: .2em;
@@ -155,9 +172,31 @@ export default {
   }
 
 
-  li div.done {
+  li div.item-title.done {
     text-decoration: line-through;
     text-decoration-color: #b02;
     text-decoration-thickness: .2em;
   }
+
+  li div.item .remove-item {
+    align-self: center;
+    height: 2rem;
+    width: 2rem;
+  }
+
+  li div.item .remove-item button {
+    background-color: #b02;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    border-radius: .3rem;
+    cursor: pointer;
+    transition: background-color .2s;
+  }
+
+  li div.item .remove-item button:hover {
+    background-color: #c13;
+  }
+
+
 </style>
