@@ -1,5 +1,5 @@
 <template>
-  <div v-if="list.length" class="list-container">
+  <div class="list-container">
     <ul>
       <li v-for="item in list" :key="item.title" @click="markItemAsDone(item)">
         <div class="item">
