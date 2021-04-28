@@ -1,32 +1,22 @@
 <template>
   <div class="app">
     <main>
-      <div class="input-container">
-        <input v-model="currentItem" type="text" placeholder="Task" @keydown.enter="insertNewItem">
-        <button @click="insertNewItem">+</button>
-      </div>
-      <div class="list-container">
-        <ul>
-          <li v-for="item in list" :key="item.title" @click="markItemAsDone(item)">
-            <div class="item">
-              <div :class="['item-title', { done: item.done }]">
-                {{ item.title }} 
-              </div>
-              <div class="remove-item" @click="removeItem(item)">
-                <button>X</button>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <app-new-task />
+      <app-task-list :list="list" />
     </main>
   </div>
 </template>
 
 <script>
+import AppTaskList from './components/AppTaskList'
+import AppNewTask from './components/AppNewTask'
 
 export default {
   name: 'App',
+  components: {
+    AppTaskList,
+    AppNewTask
+  },
   data() {
     return {
       currentItem: '',
@@ -43,22 +33,6 @@ export default {
       ]
     }
   },
-  methods: {
-    insertNewItem() {
-      if (this.currentItem) {
-        this.list.unshift({ title: this.currentItem, done: false })
-        this.currentItem = ''
-      }
-    },
-    markItemAsDone(item) {
-      const itemIndex = this.list.indexOf(item)
-      this.list[itemIndex].done = !item.done
-    },
-    removeItem(item) {
-      const itemIndex = this.list.indexOf(item)
-      this.list.splice(itemIndex, 1)
-    }
-  }
 }
 </script>
 
@@ -109,94 +83,5 @@ export default {
     flex-direction: column;
     gap: 2rem;
   }
-
-  .input-container {
-    height: 3rem;
-    display: flex;
-  }
-
-  .input-container input {
-    text-indent: 1rem;
-    flex: 1;
-    font-size: 1.2rem;
-    border-top-left-radius: .5rem;
-    border-bottom-left-radius: .5rem;
-  }
-
-  .input-container button {
-    width: 3rem;
-    border-top-right-radius: .5rem;
-    border-bottom-right-radius: .5rem;
-    cursor: pointer;
-  }
-
-  .list-container {
-    flex: 1;
-    background: #444;
-    border-radius: .75rem;
-    padding: 1.6rem 1rem;
-    border: .112rem solid #333;
-    overflow-y: scroll;
-  }
-
-  ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem
-  }
-
-  li {
-    padding: 1rem;
-    border: .8px solid #3336;
-    border-radius: .75rem;
-    background: #333;
-  }
-
-  li div.item {
-    display: flex;
-    justify-items: flex-end;
-    justify-content: flex-end;
-    gap: 1rem;
-  }
-
-  li div.item-title {
-    align-self: center;
-    flex: 1;
-    position: relative;
-    text-decoration: line-through;
-    text-decoration-color: transparent;
-    text-decoration-thickness: .2em;
-    transition-property: text-decoration;
-    transition-duration: .2s;
-  }
-
-
-  li div.item-title.done {
-    text-decoration: line-through;
-    text-decoration-color: #b02;
-    text-decoration-thickness: .2em;
-  }
-
-  li div.item .remove-item {
-    align-self: center;
-    height: 2rem;
-    width: 2rem;
-  }
-
-  li div.item .remove-item button {
-    background-color: #b02;
-    color: #fff;
-    height: 100%;
-    width: 100%;
-    border-radius: .3rem;
-    cursor: pointer;
-    transition: background-color .2s;
-  }
-
-  li div.item .remove-item button:hover {
-    background-color: #c13;
-  }
-
 
 </style>
