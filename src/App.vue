@@ -157,7 +157,7 @@ export default {
 
   li div.done {
     text-decoration: line-through;
-    text-decoration-color: #f24;
+    text-decoration-color: #b02;
     text-decoration-thickness: .2em;
   }
 </style>
