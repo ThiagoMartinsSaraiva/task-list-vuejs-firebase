@@ -10,6 +10,7 @@
 <script>
 import AppTaskList from './components/AppTaskList'
 import AppNewTask from './components/AppNewTask'
+import { api } from './services/api'
 
 export default {
   name: 'App',
@@ -20,19 +21,18 @@ export default {
   data() {
     return {
       currentItem: '',
-      list: [
-        { title: 'Study HTML', done: false },
-        { title: 'Study CSS', done: false },
-        { title: 'Study JS', done: false },
-        { title: 'Study VueJS', done: false },
-        { title: 'Create TaskList Project', done: false },
-        { title: 'Create Project Using 3rd Party API', done: false },
-        { title: 'Create Pokemon Project Using 3rd Party API', done: false },
-        { title: 'Create Star Wars Project Using 3rd Party API', done: false },
-        { title: 'Create Naruto Project Using 3rd Party API', done: false },
-      ]
+      list: [],
     }
   },
+  methods: {
+    async fetchItems() {
+      const { data } = await api.get('tasks.json')
+      console.log({ data })
+    }
+  },
+  created() {
+    this.fetchItems()
+  }
 }
 </script>
 

@@ -1,22 +1,31 @@
 <template>
   <div class="input-container">
-    <input v-model="currentItem" type="text" placeholder="Task" @keydown.enter="insertNewItem">
+    <input v-model="title" type="text" placeholder="Task" @keydown.enter="insertNewItem">
     <button @click="insertNewItem">+</button>
   </div>
 </template>
 
 <script>
+import { api } from '../services/api'
+
 export default {
   name: 'AppNewTask',
   data() {
     return {
-      currentItem: '',
+      title: '',
     }
   },
   methods: {
     insertNewItem() {
-      if (this.currentItem) {
-        console.log(this.currentItem)
+      if (this.title) {
+        api.post('tasks.json', {
+          title: this.title,
+          done: false,
+        })
+          .then(response => {
+            console.log({ response })
+            this.title = ''
+          })
       }
     }
   }
