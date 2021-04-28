@@ -2,13 +2,13 @@
   <div class="app">
     <main>
       <div class="input-container">
-        <input type="text" placeholder="Task">
-        <button>+</button>
+        <input v-model="currentItem" type="text" placeholder="Task" @keydown.enter="insertNewItem">
+        <button @click="insertNewItem">+</button>
       </div>
       <div class="list-container">
         <ul>
-          <li v-for="item in list" :key="item.title">
-            <div>
+          <li v-for="item in list" :key="item.title" @click="markItemAsDone(item)">
+            <div :class="{ done: item.done }">
               {{ item.title }} 
             </div>
           </li>
@@ -24,6 +24,7 @@ export default {
   name: 'App',
   data() {
     return {
+      currentItem: '',
       list: [
         { title: 'Study HTML', done: false },
         { title: 'Study CSS', done: false },
@@ -35,6 +36,18 @@ export default {
         { title: 'Create Star Wars Project Using 3rd Party API', done: false },
         { title: 'Create Naruto Project Using 3rd Party API', done: false },
       ]
+    }
+  },
+  methods: {
+    insertNewItem() {
+      if (this.currentItem) {
+        this.list.unshift({ title: this.currentItem, done: false })
+        this.currentItem = ''
+      }
+    },
+    markItemAsDone(item) {
+      const itemIndex = this.list.indexOf(item)
+      this.list[itemIndex].done = !item.done
     }
   }
 }
@@ -129,5 +142,22 @@ export default {
     border: .8px solid #3336;
     border-radius: .75rem;
     background: #333;
+  }
+
+  li div {
+    position: relative;
+    width: fit-content;
+    text-decoration: line-through;
+    text-decoration-color: transparent;
+    text-decoration-thickness: .2em;
+    transition-property: text-decoration;
+    transition-duration: .2s;
+  }
+
+
+  li div.done {
+    text-decoration: line-through;
+    text-decoration-color: #f24;
+    text-decoration-thickness: .2em;
   }
 </style>
