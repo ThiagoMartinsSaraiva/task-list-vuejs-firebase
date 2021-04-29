@@ -22,8 +22,8 @@ export default {
           title: this.title,
           done: false,
         })
-          .then(response => {
-            console.log({ response })
+          .then(({ data }) => {
+            this.$emit('new-item', data)
             this.title = ''
           })
       }
