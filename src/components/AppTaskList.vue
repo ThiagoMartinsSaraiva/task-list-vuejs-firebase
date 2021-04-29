@@ -28,8 +28,13 @@ export default {
   },
   methods: {
     markItemAsDone(item) {
-      const itemIndex = this.list.indexOf(item)
-      this.$emit('mark-item-as-done', itemIndex)
+      api.patch(`tasks/${item.id}.json`, {
+        done: !item.done
+      })
+        .then(() => {
+          const itemIndex = this.list.indexOf(item)
+          this.$emit('mark-item-as-done', itemIndex)
+        })
     },
     removeItem(item) {
       api.delete(`tasks/${item.id}.json`)
