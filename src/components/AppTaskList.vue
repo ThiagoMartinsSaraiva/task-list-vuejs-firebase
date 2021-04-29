@@ -16,24 +16,27 @@
 </template>
 
 <script>
+import { api } from '../services/api'
+
 export default {
   name: 'AppTaskList',
   props: {
     list: {
       type: Array,
-      default: () => []
+      required: true,
     }
   },
   methods: {
     markItemAsDone(item) {
       const itemIndex = this.list.indexOf(item)
-      console.log(itemIndex)
-      // this.list[itemIndex].done = !item.done
+      this.$emit('mark-item-as-done', itemIndex)
     },
     removeItem(item) {
-      const itemIndex = this.list.indexOf(item)
-      console.log(itemIndex)
-      // this.list.splice(itemIndex, 1)
+      api.delete(`tasks/${item.id}.json`)
+      .then(() => {
+        const itemIndex = this.list.indexOf(item)
+        this.$emit('remove-item', itemIndex)
+      })
     }
   }
 }

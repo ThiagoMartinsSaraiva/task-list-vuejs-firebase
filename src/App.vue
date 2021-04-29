@@ -2,7 +2,7 @@
   <div class="app">
     <main>
       <app-new-task />
-      <app-task-list :list="list" />
+      <app-task-list :list="list" @remove-item="remove" @mark-item-as-done="markAsDone" />
     </main>
   </div>
 </template>
@@ -28,6 +28,12 @@ export default {
     async fetchItems() {
       const { data } = await api.get('tasks.json')
       this.list = data
+    },
+    markAsDone(itemIndex) {
+      this.list[itemIndex].done = !this.list[itemIndex].done
+    },
+    remove (itemIndex) {
+      this.list.splice(itemIndex, 1)
     }
   },
   created() {
