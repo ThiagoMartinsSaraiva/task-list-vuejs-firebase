@@ -27,7 +27,7 @@ export default {
   methods: {
     async fetchItems() {
       const { data } = await api.get('tasks.json')
-      this.list = data.reverse()
+      this.list = data
     },
     markAsDone(itemIndex) {
       this.list[itemIndex].done = !this.list[itemIndex].done
