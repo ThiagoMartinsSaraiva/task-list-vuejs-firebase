@@ -1,4 +1,10 @@
-# vue-task-list-firebase
+# Task List utilizando vuejs e firebase
+
+## Link do projeto
+```
+https://task-list-vue-firebase.netlify.app/
+```
+
 
 ## Project setup
 ```
