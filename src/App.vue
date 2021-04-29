@@ -30,10 +30,14 @@ export default {
       this.list = data
     },
     markAsDone(itemIndex) {
-      this.list[itemIndex].done = !this.list[itemIndex].done
+      if (this.list[itemIndex]) {
+        this.list[itemIndex].done = !this.list[itemIndex].done
+      }
     },
     remove (itemIndex) {
-      this.list.splice(itemIndex, 1)
+      if (this.list[itemIndex]) {
+        this.list.splice(itemIndex, 1)
+      }
     },
     insertNew(task) {
       this.list.unshift(task)
