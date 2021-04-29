@@ -1,8 +1,8 @@
 <template>
   <div class="list-container">
     <ul>
-      <li v-for="item in list" :key="item.title" @click="markItemAsDone(item)">
-        <div class="item">
+      <li v-for="item in list" :key="item.title">
+        <div class="item" @click="markItemAsDone(item)">
           <div :class="['item-title', { done: item.done }]">
             {{ item.title }} 
           </div>
