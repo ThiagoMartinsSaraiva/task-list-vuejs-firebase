@@ -2,8 +2,8 @@
   <div class="list-container">
     <ul>
       <li v-for="item in list" :key="item.title">
-        <div class="item" @click="markItemAsDone(item)">
-          <div :class="['item-title', { done: item.done }]">
+        <div class="item">
+          <div :class="['item-title', { done: item.done }]" @click="markItemAsDone(item)">
             {{ item.title }} 
           </div>
           <div class="remove-item" @click="removeItem(item)">
@@ -16,8 +16,6 @@
 </template>
 
 <script>
-import { api } from '../services/api'
-
 export default {
   name: 'AppTaskList',
   props: {
@@ -28,7 +26,7 @@ export default {
   },
   methods: {
     markItemAsDone(item) {
-      api.patch(`tasks/${item.id}.json`, {
+      this.$http.patch(`tasks/${item.id}.json`, {
         done: !item.done
       })
         .then(() => {
@@ -37,7 +35,7 @@ export default {
         })
     },
     removeItem(item) {
-      api.delete(`tasks/${item.id}.json`)
+      this.$http.delete(`tasks/${item.id}.json`)
       .then(() => {
         const itemIndex = this.list.indexOf(item)
         this.$emit('remove-item', itemIndex)

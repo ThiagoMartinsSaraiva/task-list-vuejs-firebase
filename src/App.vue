@@ -10,7 +10,6 @@
 <script>
 import AppTaskList from './components/AppTaskList'
 import AppNewTask from './components/AppNewTask'
-import { api } from './services/api'
 
 export default {
   name: 'App',
@@ -26,7 +25,7 @@ export default {
   },
   methods: {
     async fetchItems() {
-      const { data } = await api.get('tasks.json')
+      const { data } = await this.$http.get('tasks.json')
       this.list = data
     },
     markAsDone(itemIndex) {

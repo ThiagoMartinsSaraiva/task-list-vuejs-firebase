@@ -6,8 +6,6 @@
 </template>
 
 <script>
-import { api } from '../services/api'
-
 export default {
   name: 'AppNewTask',
   data() {
@@ -18,7 +16,7 @@ export default {
   methods: {
     insertNewItem() {
       if (this.title) {
-        api.post('tasks.json', {
+        this.$http.post('tasks.json', {
           title: this.title,
           done: false,
         })
